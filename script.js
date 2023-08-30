@@ -4,8 +4,8 @@ const weightInput = document.querySelector("#weight-input");
 const finalText = document.querySelector("#final-text-parent");
 const calculateButton = document.querySelector("#calculate");
 
-const bmiFinalResult = document.createElement("p");
-const finalMixedText = document.createElement("p");
+const bmiFinalResult = document.createElement("span");
+const finalMixedText = document.createElement("span");
 
 function basicCalculation() {
   changingToMeter = heightInput.value / 100;
@@ -17,7 +17,7 @@ function basicCalculation() {
 function matchingUpValues() {
   basicCalculation();
 
-  finalText = document.createElement("p");
+  // finalText = document.createElement("p");
 
   if (rounding < 18.5) {
     console.log("Under Weight");
@@ -34,7 +34,7 @@ function matchingUpValues() {
   } else if (rounding > 35 && rounding < 39.9) {
     console.log("Class II Obesity");
     bmiFinalResult.innerText = "Class II Obesity";
-  } else {
+  } else if (rounding > 40) {
     console.log("Class III Obesity");
     bmiFinalResult.innerText = "Class III Obesity";
   }
@@ -44,8 +44,8 @@ function matchingUpValues() {
 
 calculateButton.addEventListener("click", function () {
   // bmiResultText.innerHTML = matchingUpValues();
-  finalMixedText.innerText = `Your BMI is ${matchingUpValues()}`;
 
   finalText.append(bmiFinalResult);
   finalText.append(finalMixedText);
+  finalMixedText.innerText = `Your BMI is ${matchingUpValues()}`;
 });
