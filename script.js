@@ -1,8 +1,11 @@
-let nameInput = document.querySelector("#name-input");
-let heightInput = document.querySelector("#height-input");
-let weightInput = document.querySelector("#weight-input");
-let finalText = document.querySelector("#final-text");
-let calculateButton = document.querySelector("#calculate");
+const nameInput = document.querySelector("#name-input");
+const heightInput = document.querySelector("#height-input");
+const weightInput = document.querySelector("#weight-input");
+const finalText = document.querySelector("#final-text-parent");
+const calculateButton = document.querySelector("#calculate");
+
+const bmiFinalResult = document.createElement("p");
+const finalMixedText = document.createElement("p");
 
 function basicCalculation() {
   changingToMeter = heightInput.value / 100;
@@ -13,23 +16,36 @@ function basicCalculation() {
 
 function matchingUpValues() {
   basicCalculation();
+
+  finalText = document.createElement("p");
+
   if (rounding < 18.5) {
     console.log("Under Weight");
+    bmiFinalResult.innerText = "Underweight";
   } else if (rounding > 18.5 && rounding < 24.9) {
     console.log("Healty");
+    bmiFinalResult.innerText = "Healty";
   } else if (rounding > 25 && rounding < 29.9) {
     console.log("Overweight");
+    bmiFinalResult.innerText = "Overweight";
   } else if (rounding > 30 && rounding < 34.9) {
     console.log("Class I Obesity");
+    bmiFinalResult.innerText = "Class I Obesity";
   } else if (rounding > 35 && rounding < 39.9) {
     console.log("Class II Obesity");
+    bmiFinalResult.innerText = "Class II Obesity";
   } else {
     console.log("Class III Obesity");
+    bmiFinalResult.innerText = "Class III Obesity";
   }
 
   return rounding;
 }
 
 calculateButton.addEventListener("click", function () {
-  finalText.innerHTML = matchingUpValues();
+  // bmiResultText.innerHTML = matchingUpValues();
+  finalMixedText.innerText = `Your BMI is ${matchingUpValues()}`;
+
+  finalText.append(bmiFinalResult);
+  finalText.append(finalMixedText);
 });
