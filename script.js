@@ -3,49 +3,39 @@ const heightInput = document.querySelector("#height-input");
 const weightInput = document.querySelector("#weight-input");
 const finalText = document.querySelector("#final-text-parent");
 const calculateButton = document.querySelector("#calculate");
-
-const bmiFinalResult = document.createElement("span");
-const finalMixedText = document.createElement("span");
+const bmiResultText = document.querySelector("#bmi-result-text");
 
 function basicCalculation() {
   changingToMeter = heightInput.value / 100;
-
   calculating = weightInput.value / changingToMeter ** 2;
-  rounding = Math.round(calculating);
+
+  rounded = Math.round(calculating);
+  return rounded;
 }
 
 function matchingUpValues() {
-  basicCalculation();
+  // basicCalculation();
 
-  // finalText = document.createElement("p");
-
-  if (rounding < 18.5) {
-    console.log("Under Weight");
-    bmiFinalResult.innerText = "Underweight";
-  } else if (rounding > 18.5 && rounding < 24.9) {
-    console.log("Healty");
-    bmiFinalResult.innerText = "Healty";
-  } else if (rounding > 25 && rounding < 29.9) {
-    console.log("Overweight");
-    bmiFinalResult.innerText = "Overweight";
-  } else if (rounding > 30 && rounding < 34.9) {
-    console.log("Class I Obesity");
-    bmiFinalResult.innerText = "Class I Obesity";
-  } else if (rounding > 35 && rounding < 39.9) {
-    console.log("Class II Obesity");
-    bmiFinalResult.innerText = "Class II Obesity";
-  } else if (rounding > 40) {
-    console.log("Class III Obesity");
-    bmiFinalResult.innerText = "Class III Obesity";
+  if (rounded < 18.5) {
+    finalText = bmiFinalResult.innerText = "Underweight";
+  } else if (rounded > 18.5 && rounded < 24.9) {
+    finalText = bmiFinalResult.innerText = "Healty";
+  } else if (rounded > 25 && rounded < 29.9) {
+    finalText = bmiFinalResult.innerText = "Overweight";
+  } else if (rounded > 30 && rounded < 34.9) {
+    finalText = bmiFinalResult.innerText = "Class I Obesity";
+  } else if (rounded > 35 && rounded < 39.9) {
+    finalText = bmiFinalResult.innerText = "Class II Obesity";
+  } else if (rounded > 40) {
+    finalText = bmiFinalResult.innerText = "Class III Obesity";
   }
 
-  return rounding;
+  // return finalText;
 }
 
 calculateButton.addEventListener("click", function () {
-  // bmiResultText.innerHTML = matchingUpValues();
-
-  finalText.append(bmiFinalResult);
-  finalText.append(finalMixedText);
-  finalMixedText.innerText = `Your BMI is ${matchingUpValues()}`;
+  bmiResultText.innerHTML = `Hey your BMI is ${basicCalculation()}, and you are ${matchingUpValues(
+    basicCalculation()
+  )}`;
+  console.log(basicCalculation());
 });
